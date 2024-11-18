@@ -92,7 +92,6 @@ class MaxMinOptimalSolution:
         else:
             # All Solutions
             all_solution_matrix = []
-            # print(f"{15 * '.'}")
             for p_star in unique_combinations_p_star:
                 i_index_sets_star = self.calculate_i_index_sets(p_star)
                 x_optimal = self.calculate_optimal_x(i_index_sets_star)

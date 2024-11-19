@@ -68,7 +68,7 @@ def optimized_values_of_owa(data_instance_):
             most_optimized_x = optimized_x
             optimized_range = [a1, b1, a2, b2]
         # Update if high dispersion found if optimized values are equal
-        elif result == most_optimized_value and dispersion_1 > glb_disp1 and dispersion_2 > glb_disp2:
+        elif result == most_optimized_value and dispersion_1 > glb_disp1 and dispersion_2 > glb_disp2 and sum(optimized_x) > sum(most_optimized_x):
             most_optimized_value = result
             most_optimized_x = optimized_x
             optimized_range = [a1, b1, a2, b2]
@@ -140,9 +140,15 @@ if __name__ == '__main__':
     from owa_optimal_solution import OWAOptimalSolution
 
     data_instances = dataset()
-    indexes = list(map(int, input("Enter data number for which you want to optimize owa values\n").split()))
-    if len(indexes) > 1:
-        sys.exit("Enter single number")
+
+    try:
+        indexes = list(map(int, input("Enter data number for which you want to optimize owa values\n").split()))
+        if (isinstance(indexes, int) and indexes >= 1) or len(indexes) > 1:
+            raise ValueError
+    except ValueError:
+        print("Not a Valid Number")
+        sys.exit()
+
     data_instance = [data_instances[data_instance_index - 1] for data_instance_index in indexes]
     data_instance[0][4] = False
     print(f"{20 * '_*_'}")

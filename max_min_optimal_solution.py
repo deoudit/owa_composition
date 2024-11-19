@@ -1,5 +1,5 @@
 from itertools import product
-import random
+# import random
 
 
 class MaxMinOptimalSolution:
@@ -79,25 +79,29 @@ class MaxMinOptimalSolution:
         # print("Number of solutions are: {}".format(len(unique_combinations_p_star)))
         return unique_combinations_p_star
 
+    # Controller
     def solutions_for_combinations(self):
         unique_combinations_p_star = self.optimal_2d_path()
         if unique_combinations_p_star == -1:
             return 0.0, [0]
-        if not self.flag:
-            # Only one Solution
-            p_star = unique_combinations_p_star[random.randint(0, len(unique_combinations_p_star) - 1)]
+        # if not self.flag:
+        #     # Only one Solution
+        #     p_star = unique_combinations_p_star[random.randint(0, len(unique_combinations_p_star) - 1)]
+        #     i_index_sets_star = self.calculate_i_index_sets(p_star)
+        #     x_optimal = self.calculate_optimal_x(i_index_sets_star)
+        #     return self.calculate_optimal_value(x_optimal)
+        # else:
+        # All Solutions
+        all_solution_matrix = []
+        for p_star in unique_combinations_p_star:
             i_index_sets_star = self.calculate_i_index_sets(p_star)
             x_optimal = self.calculate_optimal_x(i_index_sets_star)
-            return self.calculate_optimal_value(x_optimal)
+            all_solution_matrix.append(self.calculate_optimal_value(x_optimal))
+        min_value = min(item[0] for item in all_solution_matrix)
+        all_solution_matrix = [item for item in all_solution_matrix if item[0] == min_value]
+        if len(all_solution_matrix) <= 1 or self.flag == False:
+            return all_solution_matrix[0]
         else:
-            # All Solutions
-            all_solution_matrix = []
-            for p_star in unique_combinations_p_star:
-                i_index_sets_star = self.calculate_i_index_sets(p_star)
-                x_optimal = self.calculate_optimal_x(i_index_sets_star)
-                all_solution_matrix.append(self.calculate_optimal_value(x_optimal))
-            min_value = min(item[0] for item in all_solution_matrix)
-            all_solution_matrix = [item for item in all_solution_matrix if item[0] == min_value]
             return all_solution_matrix
 
     def calculate_i_index_sets(self, p_star):

@@ -38,6 +38,12 @@ def optimized_values_of_owa(data_instance_):
         result, optimized_x = owa_result.solutions_for_combinations()
         result = round(result, 2)
 
+        # Debugging
+        # if owa_vals == [.0, .2, .0, .2]:
+        #     print(f"{10 * '-'}")
+        #     print(result, optimized_x)
+        #     print(f"{10 * '-'}")
+
         #If Inconsistent Solutions or max of optimal_x is below max of b_low
         if result == 0.0 or max(data_instance_[0]) > max(optimized_x):
             continue
@@ -51,19 +57,25 @@ def optimized_values_of_owa(data_instance_):
 
         # optimized_x_counter = len([val for val in optimized_x if val >= min(data_instance_[0])])
 
+        # Debugging
+        # if result == 0.3:
+        #     print(result, optimized_x, [a1, b1, a2, b2])
+        #     print(f"{20*'*'}")
+
         #Update if better optimized value found
         if result < most_optimized_value:
             most_optimized_value = result
             most_optimized_x = optimized_x
             optimized_range = [a1, b1, a2, b2]
         # Update if high dispersion found if optimized values are equal
-        elif result == most_optimized_value and dispersion_1 > glb_disp1 and dispersion_2 > glb_disp2 and sum(optimized_x) > sum(most_optimized_x):
+        elif result == most_optimized_value and dispersion_1 > glb_disp1 and dispersion_2 > glb_disp2:
             most_optimized_value = result
             most_optimized_x = optimized_x
             optimized_range = [a1, b1, a2, b2]
             glb_disp1 = dispersion_1
             glb_disp2 = dispersion_2
-            # almost same as dispersion "and optimized_x_counter > most_optimized_x_counter"
+            # almost same as dispersion "and optimized_x_counter >= most_optimized_x_counter" and
+            # "and sum(optimized_x) > sum(most_optimized_x)"
             # most_optimized_x_counter = optimized_x_counter
 
         # Store the values

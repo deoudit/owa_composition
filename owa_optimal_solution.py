@@ -48,6 +48,7 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
                 x_hat.append(owa_val)
             else:
                 x_hat.append(1)
+        # print(f"owa - {x_hat}")
         return x_hat
 
     def calculate_optimal_x(self, i_index_sets_star):

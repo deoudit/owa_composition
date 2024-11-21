@@ -62,6 +62,10 @@ def optimized_values_of_owa(data_instance_):
         #     print(result, optimized_x, [a1, b1, a2, b2])
         #     print(f"{20*'*'}")
 
+        # Print where dispersion values are 0.0
+        # if dispersion_1 == 0.0 and dispersion_2 == 0.0 and result == 0.42:
+        #     print("Dispersion zero {}".format([a1, b1, a2, b2]))
+
         #Update if better optimized value found
         if result < most_optimized_value:
             most_optimized_value = result

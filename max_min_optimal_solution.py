@@ -23,6 +23,7 @@ class MaxMinOptimalSolution:
                 x_hat.append(min(cap_i_bar))
             else:
                 x_hat.append(1)
+        # print(f"max_min - {x_hat}")
         return x_hat
 
     def calculate_j_index(self):
@@ -35,6 +36,7 @@ class MaxMinOptimalSolution:
                     s.add(j+1)
             j_matrix.append(s)
         is_inconsistent = False
+        # print(j_matrix)
         for j_set in j_matrix:
             if len(j_set) < 2:
                 is_inconsistent = True
@@ -77,6 +79,7 @@ class MaxMinOptimalSolution:
         # Use a set to collect unique combinations
         unique_combinations_p_star = list(set(all_possible_combinations))
         # print("Number of solutions are: {}".format(len(unique_combinations_p_star)))
+        # print(unique_combinations_p_star)
         return unique_combinations_p_star
 
     # Controller
@@ -113,6 +116,7 @@ class MaxMinOptimalSolution:
         for ind in range(1, self.m+1):
             if len(i_index_sets_star[ind]) == 0:
                 i_index_sets_star[ind].add(0)
+        # print(i_index_sets_star)
         return i_index_sets_star
 
     def calculate_optimal_x(self, i_index_sets_star):
@@ -123,6 +127,7 @@ class MaxMinOptimalSolution:
                 if self.b_low[ind-1] > max_m and ind != 0:
                     max_m = self.b_low[ind-1]
             x_optimal.append(round(max_m, 2))
+        # print(f"max_min - {x_optimal}")
         return x_optimal
 
     def calculate_optimal_value(self, x_optimal):

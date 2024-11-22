@@ -25,7 +25,7 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
             elif a_owa <= r <= b_owa:
                 weights_linguistic.append((r - a_owa) / (b_owa - a_owa))
             else:
-                weights_linguistic.append(1)
+                weights_linguistic.append(1.0)
         # Calculate weights
         weights_final = []
         for i in range(1, len(weights_linguistic)):

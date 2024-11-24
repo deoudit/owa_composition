@@ -20,6 +20,9 @@ def optimized_values_of_owa(data_instance_):
     optimized_range = [None]
     glb_disp1, glb_disp2 = 0.0, 0.0
 
+    max_disp1 = 0.0
+    disp_owa_vals1= []
+
     # For having most_optimized_x with most numbers of vals in optimized_x >= min(data_instance_[0])
     # most_optimized_x_counter = 0
 
@@ -48,13 +51,18 @@ def optimized_values_of_owa(data_instance_):
         if result == 0.0 or max(data_instance_[0]) > max(optimized_x):
             continue
 
-        # Function Call for dispersion
+        # Creating object without waking up the constructor for static method
         owa_weights = OWAOptimalSolution.__new__(OWAOptimalSolution)
+        # Function Call for dispersion
         dispersion_1 = dispersion_weights(
             owa_weights.calculate_owa_weights_linguistic(a1, b1, len(data_instance_[3])))
         dispersion_2 = dispersion_weights(
             owa_weights.calculate_owa_weights_linguistic(a2, b2, len(data_instance_[3])))
 
+
+        if dispersion_1 > max_disp1:
+            max_disp1 = dispersion_1
+            disp_owa_vals1 = [a1, b1]
         # optimized_x_counter = len([val for val in optimized_x if val >= min(data_instance_[0])])
 
         # Debugging
@@ -78,6 +86,7 @@ def optimized_values_of_owa(data_instance_):
             optimized_range = [a1, b1, a2, b2]
             glb_disp1 = dispersion_1
             glb_disp2 = dispersion_2
+            # print(glb_disp1, glb_disp2)
             # almost same as dispersion "and optimized_x_counter >= most_optimized_x_counter" and
             # "and sum(optimized_x) > sum(most_optimized_x)"
             # most_optimized_x_counter = optimized_x_counter
@@ -88,6 +97,8 @@ def optimized_values_of_owa(data_instance_):
         a2_values.append(a2)
         b2_values.append(b2)
         results.append(result)
+
+    print(f"High dispersion co-ordinates are {disp_owa_vals1} with dispersion {max_disp1}")
 
     print(most_optimized_value, most_optimized_x, optimized_range)
 

@@ -32,6 +32,7 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
         weights_final = []
         for i in range(1, len(weights_linguistic)):
             weights_final.append(weights_linguistic[i] - weights_linguistic[i-1])
+        # print(weights_final)
         return weights_final
 
     def calculate_max_x(self):

@@ -2,16 +2,19 @@ def best_optimized_values():
     import sys
     import time
     from data import dataset
-    from owa_optimized_values import optimized_values_of_owa
-    from yager_owa_optimized_values import optimized_values_of_yager_owa
+    # from owa_optimized_values import optimized_values_of_owa
+    # from yager_owa_optimized_values import optimized_values_of_yager_owa
+    from owa_and_yager_owa_optimized_values import optimized_values_of_owa_and_yager
     from me_owa_optimized_values import optimized_values_of_me_owa
+    from owa_optimal_solution import OWAOptimalSolution
+    from yager_owa_optimal_solution import YagerOWAOptimalSolution
 
     data_instances = dataset()
 
     # Dispatch table to map user input to functions
     function_map = {
-        "O": optimized_values_of_owa,
-        "Y": optimized_values_of_yager_owa,
+        "O": optimized_values_of_owa_and_yager,
+        "Y": optimized_values_of_owa_and_yager,
         "M": optimized_values_of_me_owa
     }
 
@@ -35,7 +38,12 @@ def best_optimized_values():
 
     # Call the appropriate function based on input
     if user_input in function_map:
-        function_map[user_input](data_instance[0])
+        if user_input == 'O':
+            function_map[user_input](data_instance[0], OWAOptimalSolution)
+        elif user_input == 'Y':
+            function_map[user_input](data_instance[0], YagerOWAOptimalSolution)
+        else:
+            function_map[user_input](data_instance[0])
         # print(result)
     else:
         print("Invalid input. Please choose O, Y, or M.")
@@ -46,5 +54,7 @@ def best_optimized_values():
     # Calculate runtime
     runtime = end_time - start_time
     print(f"Program runtime: {runtime:.6f} seconds")
+
+    return user_input
 
 best_optimized_values()

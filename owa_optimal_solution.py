@@ -8,6 +8,8 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
         self.b_owa_min = data_owa[6]
         self.a_owa_max = data_owa[7]
         self.b_owa_max = data_owa[8]
+        self.weights_min = self.calculate_owa_weights_linguistic(self.a_owa_min, self.b_owa_min, self.m)
+        self.weights_max = self.calculate_owa_weights_linguistic(self.a_owa_max, self.b_owa_max, self.m)
 
     @staticmethod
     def calculate_owa_weights_linguistic(a_owa, b_owa, n):
@@ -33,26 +35,27 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
         return weights_final
 
     def calculate_max_x(self):
-        weights = self.calculate_owa_weights_linguistic(self.a_owa_min, self.b_owa_min, self.m)
+        # weights_min = self.calculate_owa_weights_linguistic(self.a_owa_min, self.b_owa_min, self.m)
+        # print(self.weights_min)
         x_hat = []
         for j in range(self.n):
             cap_i_bar = []
             for i in range(self.m):
                 if self.a_matrix[i][j] > self.b_high[i]:
                     cap_i_bar.append(self.b_high[i])
-            owa_val = 0
+            owa_val = .0
             if len(cap_i_bar) > 0:
                 cap_i_bar.sort(reverse=True)
                 for ind in range(len(cap_i_bar)):
-                    owa_val += weights[ind] * cap_i_bar[ind]
+                    owa_val += self.weights_min[ind] * cap_i_bar[ind]
                 x_hat.append(owa_val)
             else:
-                x_hat.append(1)
-        # print(f"owa - {x_hat}")
+                x_hat.append(1.0)
+        # print(f"{x_hat}")
         return x_hat
 
     def calculate_optimal_x(self, i_index_sets_star):
-        weights = self.calculate_owa_weights_linguistic(self.a_owa_max, self.b_owa_max, self.m)
+        # weights_max = self.calculate_owa_weights_linguistic(self.a_owa_max, self.b_owa_max, self.m)
         x_optimal = []
         for index in i_index_sets_star:
             b_low_index = []
@@ -64,6 +67,6 @@ class OWAOptimalSolution(MaxMinOptimalSolution):
             b_low_index.sort(reverse=True)
             owa_val = 0.0
             for ind in range(len(b_low_index)):
-                owa_val += weights[ind] * b_low_index[ind]
+                owa_val += self.weights_max[ind] * b_low_index[ind]
             x_optimal.append(round(owa_val, 2))
         return x_optimal

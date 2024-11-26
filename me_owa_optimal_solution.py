@@ -1,7 +1,6 @@
-from scipy.optimize import minimize
 import math
+from scipy.optimize import minimize
 from yager_owa_optimal_solution import YagerOWAOptimalSolution
-# from data import dataset
 
 
 class MeOWAOptimalSolution(YagerOWAOptimalSolution):
@@ -9,8 +8,6 @@ class MeOWAOptimalSolution(YagerOWAOptimalSolution):
         super().__init__(data_me_owa)
         self.alpha_min = data_me_owa[9]
         self.alpha_max = data_me_owa[10]
-        # self.weights_min = self.calculate_me_owa_weights(self.alpha_min, self.m)
-        # self.weights_max = self.calculate_me_owa_weights(self.alpha_max, self.m)
 
     @staticmethod
     def entropy_objective(w_vec):
@@ -109,18 +106,3 @@ class MeOWAOptimalSolution(YagerOWAOptimalSolution):
                 owa_val += weights_max[ind] * b_low_index[ind]
             x_optimal.append(round(owa_val, 2))
         return x_optimal
-
-
-# data_instance = dataset()
-# data_instance = data_instance[0]
-# me_owa = MeOWAOptimalSolution(data_instance)
-# print(me_owa.solutions_for_combinations())
-# Example usage
-# n = 6  # Number of Wj
-# alpha = .0  # Desired alpha value
-# instance1 = MeOWAOptimalSolution.__new__(MeOWAOptimalSolution)
-# optimal_W = instance1.calculate_me_owa_weights(alpha, n)
-# for index in range(len(optimal_W)):
-#     optimal_W[index] = round(optimal_W[index], 4)
-# print(optimal_W)
-# print(sum(optimal_W))

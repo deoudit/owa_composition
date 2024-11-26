@@ -22,8 +22,7 @@ class MaxMinOptimalSolution:
             if len(cap_i_bar) > 0:
                 x_hat.append(min(cap_i_bar))
             else:
-                x_hat.append(1)
-        # print(f"max_min - {x_hat}")
+                x_hat.append(1.0)
         return x_hat
 
     def calculate_j_index(self):

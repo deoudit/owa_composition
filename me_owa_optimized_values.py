@@ -1,3 +1,5 @@
+from me_owa_optimal_solution import MeOWAOptimalSolution
+
 def optimized_values_of_me_owa(data_instance_):
     # Generate range of values
     step = 0.01
@@ -38,35 +40,34 @@ def optimized_values_of_me_owa(data_instance_):
     print(most_optimized_value, most_optimized_x, optimized_range)
 
 
-if __name__ == '__main__':
-    import sys
-    import time
-    from data import dataset
-    from me_owa_optimal_solution import MeOWAOptimalSolution
-
-    data_instances = dataset()
-
-    try:
-        indexes = list(map(int, input("Enter data number for which you want to optimize owa values\n").split()))
-        if (isinstance(indexes, int) and indexes >= 1) or len(indexes) > 1:
-            raise ValueError
-    except ValueError:
-        print("Not a Valid Number")
-        sys.exit()
-
-    data_instance = [data_instances[data_instance_index - 1] for data_instance_index in indexes]
-    data_instance[0][4] = False
-    print(f"{20 * '_*_'}")
-
-    # Start time
-    start_time = time.perf_counter()
-
-    # Function call
-    optimized_values_of_me_owa(data_instance[0])
-
-    # End time
-    end_time = time.perf_counter()
-
-    # Calculate runtime
-    runtime = end_time - start_time
-    print(f"Program runtime: {runtime:.6f} seconds")
+# if __name__ == '__main__':
+#     import sys
+#     import time
+#     from data import dataset
+#
+#     data_instances = dataset()
+#
+#     try:
+#         indexes = list(map(int, input("Enter data number for which you want to optimize owa values\n").split()))
+#         if (isinstance(indexes, int) and indexes >= 1) or len(indexes) > 1:
+#             raise ValueError
+#     except ValueError:
+#         print("Not a Valid Number")
+#         sys.exit()
+#
+#     data_instance = [data_instances[data_instance_index - 1] for data_instance_index in indexes]
+#     data_instance[0][4] = False
+#     print(f"{20 * '_*_'}")
+#
+#     # Start time
+#     start_time = time.perf_counter()
+#
+#     # Function call
+#     optimized_values_of_me_owa(data_instance[0])
+#
+#     # End time
+#     end_time = time.perf_counter()
+#
+#     # Calculate runtime
+#     runtime = end_time - start_time
+#     print(f"Program runtime: {runtime:.6f} seconds")

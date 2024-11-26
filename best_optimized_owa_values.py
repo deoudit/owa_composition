@@ -38,7 +38,7 @@ def best_optimized_values():
         function_map[user_input](data_instance[0])
         # print(result)
     else:
-        print("Invalid input. Please choose A, B, or C.")
+        print("Invalid input. Please choose O, Y, or M.")
 
     # End time
     end_time = time.perf_counter()

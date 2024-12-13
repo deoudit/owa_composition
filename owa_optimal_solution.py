@@ -1,4 +1,4 @@
-from main.max_min_optimal_solution import MaxMinOptimalSolution
+from max_min_optimal_solution import MaxMinOptimalSolution
 
 
 class OWAOptimalSolution(MaxMinOptimalSolution):
